@@ -1,17 +1,26 @@
 {
-  "name": "atypicalfansub",
-  "type": "module",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
-  },
-  "dependencies": {
-    "@astrojs/starlight": "^0.38.3",
-    "astro": "^6.0.1",
-    "sharp": "^0.34.2"
-  }
+	"name": "atypicalfansub",
+	"type": "module",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "astro dev",
+		"start": "astro dev",
+		"build": "astro build",
+		"preview": "astro preview",
+		"astro": "astro",
+		"check": "astro check",
+		"format": "prettier --write .",
+		"format:check": "prettier --check ."
+	},
+	"dependencies": {
+		"@astrojs/starlight": "^0.38.3",
+		"astro": "^6.0.1",
+		"sharp": "^0.34.2"
+	},
+	"devDependencies": {
+		"@astrojs/check": "^0.9.8",
+		"prettier": "^3.8.3",
+		"prettier-plugin-astro": "^0.14.1",
+		"typescript": "^5.9.3"
+	}
 }

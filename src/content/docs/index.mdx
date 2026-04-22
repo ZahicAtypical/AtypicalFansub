@@ -1,40 +1,33 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash # Remove or comment out this line to display the site sidebar on this page.
+title: 非典型字幕组
+description: 专业 · 用心 · 非凡 — Atypical Fansub 官方网站
+template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  tagline: 专业字幕翻译团队，连接世界与您的视听体验
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: 浏览作品库
+      link: /works/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
-      variant: minimal
+      variant: primary
+    - text: 了解更多
+      link: /about/
+      icon: open-book
+      variant: secondary
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+## 作品预览
 
-## Next steps
-
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Change page layout" icon="document">
-		Delete `template: splash` in `src/content/docs/index.mdx` to display a
-		sidebar on this page.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
-</CardGrid>
+<div class="cta-section">
+	<h2>成为字幕组的一员</h2>
+	<p>
+		对字幕制作感兴趣？欢迎加入非典型字幕组！无论你是翻译、时轴、后期还是校对爱好者，这里都有你的位置。
+	</p>
+	<div class="hero-actions">
+		<a href="/guides/" class="primary">
+			📖 查看教程
+		</a>
+		<a href="/about/" class="secondary">
+			👥 了解团队
+		</a>
+	</div>
+</div>

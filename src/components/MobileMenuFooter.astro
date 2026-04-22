@@ -1,0 +1,18 @@
+---
+import LanguageToggle from './LanguageToggle.astro';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<div class="mobile-menu-footer sl-flex">
+	<ThemeToggle />
+	<LanguageToggle />
+</div>
+
+<style>
+	.mobile-menu-footer {
+		gap: 0.5rem;
+		align-items: center;
+		border-top: 1px solid var(--sl-color-border);
+		padding-top: 1rem;
+	}
+</style>

@@ -1,0 +1,98 @@
+---
+---
+
+<button
+	class="theme-toggle"
+	aria-label="Toggle dark/light mode"
+	type="button"
+>
+	<svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+	<svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+</button>
+
+<script is:inline>
+	(function() {
+		const btn = document.querySelector('.theme-toggle');
+		if (!btn) return;
+
+		function getTheme() {
+			const stored = typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+			if (stored === 'light' || stored === 'dark') return stored;
+			return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+		}
+
+		function setTheme(theme) {
+			document.documentElement.dataset.theme = theme;
+			if (typeof localStorage !== 'undefined') {
+				localStorage.setItem('starlight-theme', theme);
+			}
+			updateIcon(theme);
+		}
+
+		function updateIcon(theme) {
+			btn.classList.toggle('is-dark', theme === 'dark');
+			btn.classList.toggle('is-light', theme === 'light');
+		}
+
+		function toggle() {
+			const next = getTheme() === 'dark' ? 'light' : 'dark';
+			setTheme(next);
+		}
+
+		btn.addEventListener('click', toggle);
+		updateIcon(getTheme());
+
+		window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+			const stored = typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+			if (!stored) updateIcon(e.matches ? 'light' : 'dark');
+		});
+	})();
+</script>
+
+<style>
+	.theme-toggle {
+		position: relative;
+		width: 36px;
+		height: 36px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		border: none;
+		background: transparent;
+		color: var(--sl-color-text-muted);
+		cursor: pointer;
+		transition: color 0.2s ease, background-color 0.2s ease;
+		padding: 0;
+	}
+
+	.theme-toggle:hover {
+		color: var(--sl-color-text);
+		background: rgba(148, 163, 184, 0.1);
+	}
+
+	.theme-toggle svg {
+		position: absolute;
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+
+	.theme-toggle .icon-sun {
+		opacity: 0;
+		transform: rotate(90deg) scale(0.5);
+	}
+
+	.theme-toggle .icon-moon {
+		opacity: 1;
+		transform: rotate(0deg) scale(1);
+	}
+
+	.theme-toggle.is-light .icon-sun {
+		opacity: 1;
+		transform: rotate(0deg) scale(1);
+	}
+
+	.theme-toggle.is-light .icon-moon {
+		opacity: 0;
+		transform: rotate(-90deg) scale(0.5);
+	}
+</style>
