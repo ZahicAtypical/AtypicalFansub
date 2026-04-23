@@ -1,0 +1,9 @@
+/* ========================================
+   工具：代码块美化 (Code Blocks)
+   ======================================== */
+
+pre.astro-code {
+	border-radius: var(--sl-radius-medium) !important;
+	border: 1px solid var(--sl-color-border) !important;
+	background: var(--sl-color-bg-code) !important;
+}

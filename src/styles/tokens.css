@@ -1,0 +1,157 @@
+/* ========================================
+   非典型字幕组 - 设计令牌 (Design Tokens)
+   ======================================== */
+
+/* ---------- 品牌色板 - 深蓝科技风 ---------- */
+:root[data-theme='dark'],
+:root {
+	/* 品牌色 */
+	--brand-50: #eff6ff;
+	--brand-100: #dbeafe;
+	--brand-200: #bfdbfe;
+	--brand-300: #93c5fd;
+	--brand-400: #60a5fa;
+	--brand-500: #3b82f6;
+	--brand-600: #2563eb;
+	--brand-700: #1d4ed8;
+	--brand-800: #1e40af;
+	--brand-900: #1e3a8a;
+
+	/* 中性色板 */
+	--gray-0: #ffffff;
+	--gray-50: #f8fafc;
+	--gray-100: #f1f5f9;
+	--gray-200: #e2e8f0;
+	--gray-300: #cbd5e1;
+	--gray-400: #94a3b8;
+	--gray-500: #64748b;
+	--gray-600: #475569;
+	--gray-700: #334155;
+	--gray-800: #1e293b;
+	--gray-900: #0f172a;
+	--gray-950: #020617;
+
+	/* Starlight 语义映射 - 深色模式 */
+	--sl-color-accent-low: #172554;
+	--sl-color-accent: #2563eb;
+	--sl-color-accent-high: #3b82f6;
+	--sl-color-accent-higher: #60a5fa;
+
+	--sl-color-bg: #020617;
+	--sl-color-bg-nav: rgba(2, 6, 23, 0.72);
+	--sl-color-bg-sidebar: #0f172a;
+	--sl-color-bg-code: #0f172a;
+	--sl-color-bg-inline-code: #1e293b;
+	--sl-color-bg-hint: #0f172a;
+
+	--sl-color-text: #f1f5f9;
+	--sl-color-text-inverted: #020617;
+	--sl-color-text-muted: #94a3b8;
+	--sl-color-text-hint: #64748b;
+	--sl-color-text-code: #e2e8f0;
+
+	--sl-color-border: rgba(148, 163, 184, 0.15);
+	--sl-color-hairline-light: rgba(148, 163, 184, 0.1);
+	--sl-color-hairline-dark: rgba(2, 6, 23, 0.5);
+
+	/* 状态色 */
+	--sl-color-warning-bg: #422006;
+	--sl-color-warning-border: #92400e;
+	--sl-color-warning-text: #fef3c7;
+	--sl-color-danger-bg: #450a0a;
+	--sl-color-danger-border: #991b1b;
+	--sl-color-danger-text: #fee2e2;
+	--sl-color-success-bg: #052e16;
+	--sl-color-success-border: #15803d;
+	--sl-color-success-text: #dcfce7;
+	--sl-color-info-bg: #172554;
+	--sl-color-info-border: #1d4ed8;
+	--sl-color-info-text: #dbeafe;
+
+	/* 圆角体系 */
+	--sl-radius-small: 8px;
+	--sl-radius-medium: 12px;
+	--sl-radius-large: 16px;
+	--sl-radius-xl: 24px;
+	--sl-radius-full: 9999px;
+
+	/* 阴影体系 - 深色模式 */
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+	--shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4);
+	--shadow-glow: 0 0 20px rgba(37, 99, 235, 0.25);
+	--shadow-glow-lg: 0 0 40px rgba(37, 99, 235, 0.3);
+
+	/* 间距体系 */
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.25rem;
+	--space-6: 1.5rem;
+	--space-8: 2rem;
+	--space-10: 2.5rem;
+	--space-12: 3rem;
+	--space-16: 4rem;
+	--space-20: 5rem;
+	--space-24: 6rem;
+
+	/* 字体体系 */
+	--font-sans:
+		'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		'Helvetica Neue', Arial, sans-serif;
+	--font-mono:
+		'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+	/* 动画缓动 */
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+	--ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---------- 浅色模式 ---------- */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #dbeafe;
+	--sl-color-accent: #2563eb;
+	--sl-color-accent-high: #3b82f6;
+	--sl-color-accent-higher: #60a5fa;
+
+	--sl-color-bg: #ffffff;
+	--sl-color-bg-nav: rgba(255, 255, 255, 0.75);
+	--sl-color-bg-sidebar: #f8fafc;
+	--sl-color-bg-code: #f1f5f9;
+	--sl-color-bg-inline-code: #f1f5f9;
+	--sl-color-bg-hint: #f8fafc;
+
+	--sl-color-text: #0f172a;
+	--sl-color-text-inverted: #ffffff;
+	--sl-color-text-muted: #64748b;
+	--sl-color-text-hint: #94a3b8;
+	--sl-color-text-code: #1e293b;
+
+	--sl-color-border: rgba(100, 116, 139, 0.15);
+	--sl-color-hairline-light: rgba(100, 116, 139, 0.1);
+	--sl-color-hairline-dark: rgba(148, 163, 184, 0.2);
+
+	/* 状态色 - 浅色模式 */
+	--sl-color-warning-bg: #fffbeb;
+	--sl-color-warning-border: #f59e0b;
+	--sl-color-warning-text: #78350f;
+	--sl-color-danger-bg: #fef2f2;
+	--sl-color-danger-border: #ef4444;
+	--sl-color-danger-text: #991b1b;
+	--sl-color-success-bg: #f0fdf4;
+	--sl-color-success-border: #22c55e;
+	--sl-color-success-text: #166534;
+	--sl-color-info-bg: #eff6ff;
+	--sl-color-info-border: #3b82f6;
+	--sl-color-info-text: #1e40af;
+
+	/* 阴影体系 - 浅色模式 */
+	--shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+	--shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+	--shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+	--shadow-glow: 0 0 20px rgba(37, 99, 235, 0.15);
+	--shadow-glow-lg: 0 0 40px rgba(37, 99, 235, 0.2);
+}

@@ -1,0 +1,21 @@
+/* ========================================
+   工具：滚动条美化 (Scrollbar)
+   ======================================== */
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--sl-color-text-hint);
+	border-radius: var(--sl-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--sl-color-text-muted);
+}

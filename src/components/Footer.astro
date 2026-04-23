@@ -1,0 +1,260 @@
+---
+/**
+ * Footer 组件
+ * 网站页脚，展示版权信息和导航链接
+ * 支持响应式布局：宽屏显示完整版权+导航，窄屏显示精简版权并居中
+ */
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="footer-content">
+		<!-- 左侧：版权信息 -->
+		<div class="footer-left">
+			<span class="copyright">
+				<!-- 完整版权文本（宽屏显示） -->
+				<span class="copyright-full">© {currentYear} AtypicalFansub 非典型字幕组</span>
+				<!-- 精简版权文本（窄屏显示） -->
+				<span class="copyright-short">© {currentYear} 非典型字幕组</span>
+			</span>
+		</div>
+
+		<!-- 右侧：导航链接 -->
+		<nav class="footer-right" aria-label="页脚导航">
+			<a href="/guides/">使用教程</a>
+			<a href="/about/">关于我们</a>
+		</nav>
+	</div>
+</footer>
+
+<style>
+	/* ========================================
+	   基础布局
+	   ======================================== */
+
+	/**
+	 * 页脚根元素
+	 * 透明背景，与页面背景无缝融合
+	 */
+	.site-footer {
+		background: transparent;
+		padding: var(--space-1);
+	}
+
+	/**
+	 * 内容容器
+	 * 使用 Flexbox 实现左右分布布局
+	 */
+	.footer-content {
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	/* ========================================
+	   左侧版权区域
+	   ======================================== */
+
+	/**
+	 * 版权区域容器
+	 * 统一使用 Flexbox 布局，避免 display 属性切换导致的高度差异
+	 */
+	.footer-left {
+		display: flex;
+		align-items: center;
+		flex-shrink: 0;
+		min-height: 1.5rem;
+	}
+
+	/**
+	 * 版权文本包装器
+	 * 相对定位，为子元素的绝对定位提供参考
+	 */
+	.copyright {
+		color: var(--sl-color-text-muted);
+		font-size: 0.875rem;
+		line-height: 1.5;
+		white-space: nowrap;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		position: relative;
+	}
+
+	/**
+	 * 版权文本基础样式（完整版 + 精简版）
+	 * 仅使用 opacity 过渡，实现淡入淡出效果
+	 */
+	.copyright-full,
+	.copyright-short {
+		display: inline-block;
+		font-size: inherit;
+		line-height: inherit;
+		transition: opacity 0.5s cubic-bezier(0.5, 0, 0.5, 1),
+		vertical-align: middle;
+	}
+
+	/**
+	 * 完整版权文本（默认显示）
+	 * 最大宽度限制防止布局溢出
+	 */
+	.copyright-full {
+		opacity: 1;
+		max-width: 300px;
+	}
+
+	/**
+	 * 精简版权文本（默认隐藏）
+	 * 使用绝对定位脱离文档流，避免影响容器高度
+	 */
+	.copyright-short {
+		opacity: 0;
+		max-width: 200px;
+		pointer-events: none;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	/* ========================================
+	   右侧导航区域
+	   ======================================== */
+
+	/**
+	 * 导航链接容器
+	 * 使用 Flexbox 水平排列链接
+	 */
+	.footer-right {
+		display: flex;
+		gap: var(--space-2);
+		align-items: center;
+		transition:
+			opacity 0.3s cubic-bezier(0.3, 0, 0.15, 1),
+			gap 0.3s cubic-bezier(0.3, 0, 0.15, 1);
+		overflow: hidden;
+		flex-shrink: 0;
+	}
+
+	/**
+	 * 导航链接样式
+	 */
+	.footer-right a {
+		color: var(--sl-color-text-muted);
+		font-size: 0.875rem;
+		text-decoration: none;
+		transition: color 0.2s ease;
+		line-height: 1.5;
+		white-space: nowrap;
+	}
+
+	/**
+	 * 导航链接悬停效果
+	 */
+	.footer-right a:hover {
+		color: var(--sl-color-accent);
+		scale: calc(1.02);
+	}
+
+	/* ========================================
+	   响应式布局（容器查询）
+	   ======================================== */
+
+	/**
+	 * 启用容器查询
+	 * 基于 footer-content 的实际宽度进行响应式判断
+	 */
+	.footer-content {
+		container-type: inline-size;
+		container-name: footer;
+	}
+
+	/**
+	 * 窄屏模式（容器宽度 ≤ 440px）
+	 * - 隐藏导航链接
+	 * - 显示精简版权文本并居中
+	 */
+	@container footer (max-width: 440px) {
+		/* 左侧区域扩展并居中 */
+		.footer-left {
+			flex: 1 1 100%;
+			display: flex;
+			justify-content: center;
+		}
+
+		/* 隐藏完整版权文本 */
+		.copyright-full {
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+		}
+
+		/* 显示精简版权文本 */
+		.copyright-short {
+			justify-content: center;
+			opacity: 1;
+			pointer-events: auto;
+			position: relative;
+			left: auto;
+			top: auto;
+		}
+
+		/* 隐藏导航链接 */
+		.footer-right {
+			opacity: 0;
+			max-width: 0;
+			gap: 0;
+			pointer-events: none;
+			flex: 0;
+		}
+	}
+
+	/**
+	 * 宽屏模式（容器宽度 ≥ 441px）
+	 * - 显示完整版权文本（左对齐）
+	 * - 显示导航链接
+	 */
+	@container footer (min-width: 441px) {
+		/* 恢复左右分布布局 */
+		.footer-content {
+			justify-content: space-between;
+		}
+
+		/* 左侧区域恢复默认尺寸 */
+		.footer-left {
+			flex: 0 0 auto;
+			display: flex;
+			justify-content: flex-start;
+		}
+
+		/* 版权文本左对齐 */
+		.copyright {
+			justify-content: flex-start;
+		}
+
+		/* 显示完整版权文本 */
+		.copyright-full {
+			opacity: 1;
+			pointer-events: auto;
+			position: relative;
+			left: auto;
+			top: auto;
+		}
+
+		/* 隐藏精简版权文本 */
+		.copyright-short {
+			opacity: 0;
+			pointer-events: none;
+			position: absolute;
+		}
+
+		/* 显示导航链接 */
+		.footer-right {
+			opacity: 1;
+			max-width: 200px;
+			pointer-events: auto;
+			flex: 0 0 auto;
+		}
+	}
+</style>

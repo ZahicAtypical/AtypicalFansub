@@ -1,0 +1,142 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	theme: {
+		extend: {
+			colors: {
+				// Brand color scale
+				brand: {
+					50: '#eff6ff',
+					100: '#dbeafe',
+					200: '#bfdbfe',
+					300: '#93c5fd',
+					400: '#60a5fa',
+					500: '#3b82f6',
+					600: '#2563eb',
+					700: '#1d4ed8',
+					800: '#1e40af',
+					900: '#1e3a8a',
+				},
+				// Neutral gray scale
+				gray: {
+					0: '#ffffff',
+					50: '#f8fafc',
+					100: '#f1f5f9',
+					200: '#e2e8f0',
+					300: '#cbd5e1',
+					400: '#94a3b8',
+					500: '#64748b',
+					600: '#475569',
+					700: '#334155',
+					800: '#1e293b',
+					900: '#0f172a',
+					950: '#020617',
+				},
+				// Semantic colors mapped to CSS variables for dark/light mode support
+				accent: {
+					low: 'var(--sl-color-accent-low)',
+					DEFAULT: 'var(--sl-color-accent)',
+					high: 'var(--sl-color-accent-high)',
+					higher: 'var(--sl-color-accent-higher)',
+				},
+				bg: {
+					DEFAULT: 'var(--sl-color-bg)',
+					nav: 'var(--sl-color-bg-nav)',
+					sidebar: 'var(--sl-color-bg-sidebar)',
+					code: 'var(--sl-color-bg-code)',
+				},
+				text: {
+					DEFAULT: 'var(--sl-color-text)',
+					inverted: 'var(--sl-color-text-inverted)',
+					muted: 'var(--sl-color-text-muted)',
+					hint: 'var(--sl-color-text-hint)',
+					code: 'var(--sl-color-text-code)',
+				},
+				border: {
+					DEFAULT: 'var(--sl-color-border)',
+					light: 'var(--sl-color-hairline-light)',
+					dark: 'var(--sl-color-hairline-dark)',
+				},
+				status: {
+					warning: {
+						bg: 'var(--sl-color-warning-bg)',
+						border: 'var(--sl-color-warning-border)',
+						text: 'var(--sl-color-warning-text)',
+					},
+					danger: {
+						bg: 'var(--sl-color-danger-bg)',
+						border: 'var(--sl-color-danger-border)',
+						text: 'var(--sl-color-danger-text)',
+					},
+					success: {
+						bg: 'var(--sl-color-success-bg)',
+						border: 'var(--sl-color-success-border)',
+						text: 'var(--sl-color-success-text)',
+					},
+					info: {
+						bg: 'var(--sl-color-info-bg)',
+						border: 'var(--sl-color-info-border)',
+						text: 'var(--sl-color-info-text)',
+					},
+				},
+			},
+			fontFamily: {
+				sans: [
+					'Inter',
+					'ui-sans-serif',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'Segoe UI',
+					'Roboto',
+					'Helvetica Neue',
+					'Arial',
+					'sans-serif',
+				],
+				mono: [
+					'JetBrains Mono',
+					'ui-monospace',
+					'SFMono-Regular',
+					'SF Mono',
+					'Menlo',
+					'Consolas',
+					'monospace',
+				],
+			},
+			borderRadius: {
+				siny: '8px',
+				md: '12px',
+				lg: '16px',
+				xl: '24px',
+				full: '9999px',
+			},
+			boxShadow: {
+				siny: '0 1px 2px 0 rgb(0 0 0 / 0.3)',
+				md: '0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3)',
+				lg: '0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3)',
+				xl: '0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.4)',
+				glow: '0 0 20px rgba(37, 99, 235, 0.25)',
+				'glow-lg': '0 0 40px rgba(37, 99, 235, 0.3)',
+			},
+			spacing: {
+				1: '0.25rem',
+				2: '0.5rem',
+				3: '0.75rem',
+				4: '1rem',
+				5: '1.25rem',
+				6: '1.5rem',
+				8: '2rem',
+				10: '2.5rem',
+				12: '3rem',
+				16: '4rem',
+				20: '5rem',
+				24: '6rem',
+			},
+			transitionTimingFunction: {
+				'out': 'cubic-bezier(0.16, 1, 0.3, 1)',
+				'in-out': 'cubic-bezier(0.65, 0, 0.35, 1)',
+			},
+		},
+	},
+	plugins: [],
+};

@@ -1,0 +1,85 @@
+---
+import SiteLogo from './SiteLogo.astro';
+import MainNav from './MainNav.astro';
+import SocialIcons from './SocialIcons.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageToggle from './LanguageToggle.astro';
+---
+
+<header class="site-header">
+	<div class="header-inner">
+		<div class="header-left">
+			<SiteLogo />
+		</div>
+		<div class="header-center">
+			<MainNav />
+		</div>
+		<div class="header-right">
+			<SocialIcons />
+			<ThemeToggle />
+			<LanguageToggle />
+		</div>
+	</div>
+</header>
+
+<style>
+	.site-header {
+		backdrop-filter: blur(12px) saturate(80%);
+		-webkit-backdrop-filter: blur(12px) saturate(80%);
+		background: rgba(15, 23, 42, 0.85);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		height: 42px;
+		border-bottom: none;
+	}
+
+	:root[data-theme='light'] .site-header {
+		background: rgba(255, 255, 255, 0.85);
+	}
+
+	.header-inner {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 0 var(--space-6);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 100%;
+	}
+
+	.header-left {
+		flex-shrink: 0;
+		display: flex;
+		align-items: center;
+	}
+
+	.header-center {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+	}
+
+	.header-right {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 768px) {
+		.header-center {
+			display: none;
+		}
+
+		.header-inner {
+			padding: 0 var(--space-3);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.header-right .social-icons {
+			display: none;
+		}
+	}
+</style>

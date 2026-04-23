@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const docs = await getCollection('docs');
+
+	return docs
+		.filter((entry) => {
+			const slug = entry.id.replace(/\/index$/, '');
+			return slug !== '';
+		})
+		.map((entry) => ({
+			params: { slug: entry.id.replace(/\/index$/, '') },
+			props: { page: entry },
+		}));
+}
+
+interface Props {
+	page: CollectionEntry<'docs'>;
+}
+
+const { page } = Astro.props;
+const { title, description } = page.data;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={title || '非典型字幕组'} description={description}>
+	<article class="content-page">
+		<div class="content-container">
+			{title && <h1>{title}</h1>}
+			<div class="content-body">
+				<Content />
+			</div>
+		</div>
+	</article>
+</BaseLayout>
+
+<style>
+	.content-page {
+		padding: var(--space-16) var(--space-8);
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.content-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.content-page h1 {
+		font-size: clamp(2rem, 4vw, 3rem);
+		font-weight: 700;
+		letter-spacing: -0.02em;
+		margin-bottom: var(--space-6);
+		color: var(--sl-color-text);
+	}
+
+	.content-body {
+		color: var(--sl-color-text);
+		line-height: 1.8;
+	}
+</style>

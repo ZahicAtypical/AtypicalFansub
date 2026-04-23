@@ -1,0 +1,50 @@
+/* ========================================
+   基础重置与全局样式
+   ======================================== */
+
+/* 平滑滚动与字体抗锯齿 */
+html {
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	/* 隐藏滚动条但保持滚动功能 */
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+
+/* 隐藏 WebKit 滚动条 */
+html::-webkit-scrollbar {
+	display: none;
+}
+
+/* 页面基础样式：使用设计令牌确保主题切换一致性 */
+body {
+	font-family: var(--font-sans);
+	background-color: var(--sl-color-bg);
+	color: var(--sl-color-text);
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* 主内容区域：自动扩展填充剩余空间，确保 footer 固定在底部 */
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+/* 选中文本高亮 */
+::selection {
+	background: var(--sl-color-accent);
+	color: white;
+}
+
+/* 通用链接样式：排除 Hero 区域按钮避免冲突 */
+a:not(.hero-actions a):not(.starlight-hero .actions a) {
+	transition: color 0.2s var(--ease-out);
+}
+
+a:not(.hero-actions a):not(.starlight-hero .actions a):hover {
+	color: var(--sl-color-accent-high);
+}

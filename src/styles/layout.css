@@ -1,0 +1,20 @@
+/* ========================================
+   布局容器 (Layout)
+   ======================================== */
+
+/* 内容区域：限制最大宽度并居中 */
+.content-panel {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 var(--space-8);
+}
+
+/* 区域标题：响应式字体大小 */
+.content-panel h2 {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	margin-bottom: var(--space-8);
+	text-align: center;
+	color: var(--sl-color-text);
+}

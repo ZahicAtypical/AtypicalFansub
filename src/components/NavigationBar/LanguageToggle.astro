@@ -1,0 +1,101 @@
+---
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.startsWith('/en/');
+
+function getLocalePath(targetLocale: string): string {
+	if (targetLocale === 'en') {
+		// 英文内容暂时不可用，点击后保持在当前中文页面
+		return currentPath;
+	}
+	// root (zh)
+	if (isEnglish) return currentPath.replace(/^\/en/, '') || '/';
+	return currentPath;
+}
+
+const locales = [
+	{ code: 'root', label: '简体中文', href: getLocalePath('root'), isCurrent: true },
+	{ code: 'en', label: 'English', href: getLocalePath('en'), isCurrent: false },
+];
+---
+
+<div class="lang-toggle-wrapper">
+	<button class="lang-toggle" aria-label="Select language" type="button">
+		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<circle cx="12" cy="12" r="10" />
+			<path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+			<path d="M2 12h20" />
+		</svg>
+		<span class="lang-label">{locales.find(l => l.isCurrent)?.label || '简体中文'}</span>
+	</button>
+	<div class="lang-dropdown">
+		{locales.map(locale => (
+			<a href={locale.href} class={locale.isCurrent ? 'is-current' : ''}>
+				{locale.label}
+			</a>
+		))}
+	</div>
+</div>
+
+<style>
+	.lang-toggle-wrapper {
+		position: relative;
+	}
+
+	.lang-toggle {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem;
+		background: none;
+		border: none;
+		color: var(--sl-color-text);
+		cursor: pointer;
+		font-size: 0.875rem;
+	}
+
+	.lang-label {
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		.lang-label {
+			display: inline;
+		}
+	}
+
+	.lang-dropdown {
+		display: none;
+		position: absolute;
+		top: 100%;
+		right: 0;
+		background: var(--sl-color-bg);
+		border: 1px solid var(--sl-color-border);
+		border-radius: var(--sl-radius-medium);
+		padding: 0.5rem;
+		min-width: 100px;
+		box-shadow: var(--shadow-md);
+		z-index: 200; /* 控制下拉菜单的层叠顺序，确保显示在其他元素之上 */
+	}
+
+	.lang-toggle-wrapper:hover .lang-dropdown {
+		display: block;
+	}
+
+	.lang-dropdown a {
+		display: block;
+		padding: 0.5rem 0.5rem;
+		color: var(--sl-color-text);
+		text-decoration: none;
+		border-radius: var(--sl-radius-small);
+		font-size: 0.875rem;
+	}
+
+	.lang-dropdown a:hover {
+		background: var(--sl-color-bg-code);
+	}
+
+	.lang-dropdown a.is-current {
+		color: var(--sl-color-accent);
+		font-weight: 600;
+	}
+</style>

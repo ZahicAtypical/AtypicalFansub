@@ -1,0 +1,131 @@
+/* ========================================
+   工具：响应式适配 (Responsive)
+   始终最后导入，确保媒体查询优先级
+   ======================================== */
+
+/* ---------- Tablet & Mobile (<= 768px) ---------- */
+@media (max-width: 768px) {
+	/* Hero 区域：减小高度和间距 */
+	.hero {
+		min-height: auto;
+		padding: var(--space-16) var(--space-5) var(--space-12);
+	}
+
+	/* 按钮组：垂直堆叠 */
+	.hero-actions {
+		flex-direction: column;
+		width: 100%;
+		padding: 0 var(--space-4);
+	}
+
+	.hero-actions a {
+		width: 100%;
+		justify-content: center;
+	}
+
+	/* CTA 区域：减小边距 */
+	.cta-section {
+		margin: var(--space-16) var(--space-4);
+		padding: var(--space-10) var(--space-5);
+	}
+
+	/* 内容区域：减小边距 */
+	.content-panel {
+		padding: 0 var(--space-5);
+	}
+
+	/* 内容页容器 */
+	.content-page {
+		padding: var(--space-12) var(--space-5) !important;
+	}
+
+	/* 作品卡片网格：单列 */
+	.works-grid {
+		grid-template-columns: 1fr !important;
+	}
+
+	/* 统计数据网格：2列 */
+	.stats-grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+		gap: var(--space-4) !important;
+	}
+
+	/* 统计项内边距缩小 */
+	.stat-item {
+		padding: var(--space-4) var(--space-3) !important;
+	}
+}
+
+/* ---------- Small Mobile (<= 480px) ---------- */
+@media (max-width: 480px) {
+	/* 更小屏幕：进一步减小标题 */
+	.hero h1 {
+		font-size: 1.75rem;
+	}
+
+	/* 标语字号缩小 */
+	.tagline {
+		font-size: 0.9375rem;
+	}
+
+	/* 按钮内边距缩小 */
+	.btn-primary,
+	.btn-secondary {
+		padding: 0.75rem 1.5rem;
+		font-size: 0.875rem;
+	}
+
+	/* 作品卡片内边距缩小 */
+	.work-card {
+		padding: var(--space-4) !important;
+	}
+
+	/* 统计数据网格：2列保持，但间距更小 */
+	.stats-grid {
+		gap: var(--space-3) !important;
+	}
+
+	.stat-value {
+		font-size: 1.5rem !important;
+	}
+
+	.stat-label {
+		font-size: 0.75rem !important;
+	}
+
+	/* CTA 区域进一步缩小 */
+	.cta-section {
+		margin: var(--space-6) var(--space-3) var(--space-8) !important;
+		padding: var(--space-8) var(--space-4) !important;
+	}
+
+	.cta-section h2 {
+		font-size: 1.5rem !important;
+	}
+
+	.cta-section p {
+		font-size: 0.9375rem !important;
+	}
+
+	/* 内容页标题缩小 */
+	.content-page h1 {
+		font-size: 1.75rem !important;
+	}
+}
+
+/* ---------- Very Small Mobile (<= 360px) ---------- */
+@media (max-width: 360px) {
+	.hero h1 {
+		font-size: 1.5rem;
+	}
+
+	.stats-grid {
+		grid-template-columns: repeat(2, 1fr) !important;
+	}
+
+	.work-card-icon {
+		width: 2.5rem !important;
+		height: 2.5rem !important;
+		font-size: 1.5rem !important;
+	}
+}
