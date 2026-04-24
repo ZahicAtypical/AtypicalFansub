@@ -1,0 +1,195 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageToggle from './LanguageToggle.astro';
+import SocialIcons from './SocialIcons.astro';
+---
+
+<div class="hamburger-wrapper">
+	<button class="hamburger-btn" aria-label="Open menu" aria-expanded="false" type="button">
+		<span class="hamburger-line"></span>
+		<span class="hamburger-line"></span>
+		<span class="hamburger-line"></span>
+	</button>
+	<div class="hamburger-dropdown" role="menu" aria-hidden="true">
+		<div class="hamburger-content">
+			<ThemeToggle />
+			<LanguageToggle />
+			<SocialIcons />
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	(function() {
+		const wrapper = document.querySelector('.hamburger-wrapper');
+		const btn = document.querySelector('.hamburger-btn');
+		const dropdown = document.querySelector('.hamburger-dropdown');
+		if (!wrapper || !btn || !dropdown) return;
+
+		let isOpen = false;
+
+		function toggleMenu() {
+			isOpen = !isOpen;
+			btn.setAttribute('aria-expanded', String(isOpen));
+			btn.classList.toggle('is-active', isOpen);
+			dropdown.setAttribute('aria-hidden', String(!isOpen));
+			dropdown.classList.toggle('is-open', isOpen);
+			
+			if (isOpen) {
+				document.body.style.overflow = 'hidden';
+				// 聚焦第一个可交互元素
+				setTimeout(() => {
+					const firstFocusable = dropdown.querySelector('button, a, [tabindex="0"]');
+					if (firstFocusable) firstFocusable.focus();
+				}, 100);
+			} else {
+				document.body.style.overflow = '';
+				btn.focus();
+			}
+		}
+
+		function closeMenu() {
+			if (isOpen) toggleMenu();
+		}
+
+		function handleKeydown(e) {
+			if (e.key === 'Escape') {
+				closeMenu();
+			} else if (e.key === 'Tab' && isOpen) {
+				const focusableElements = dropdown.querySelectorAll('button, a, [tabindex="0"]');
+				const firstElement = focusableElements[0];
+				const lastElement = focusableElements[focusableElements.length - 1];
+
+				if (e.shiftKey && document.activeElement === firstElement) {
+					e.preventDefault();
+					lastElement.focus();
+				} else if (!e.shiftKey && document.activeElement === lastElement) {
+					e.preventDefault();
+					firstElement.focus();
+				}
+			}
+		}
+
+		btn.addEventListener('click', function(e) {
+			e.stopPropagation();
+			toggleMenu();
+		});
+
+		dropdown.addEventListener('click', function(e) {
+			e.stopPropagation();
+		});
+
+		document.addEventListener('click', closeMenu);
+		document.addEventListener('keydown', handleKeydown);
+
+		// 响应窗口大小变化
+		window.addEventListener('resize', function() {
+			if (window.innerWidth > 600 && isOpen) {
+				closeMenu();
+			}
+		});
+	})();
+</script>
+
+<style>
+	.hamburger-wrapper {
+		position: relative;
+		display: none;
+	}
+
+	@media (max-width: 600px) {
+		.hamburger-wrapper {
+			display: block;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.hamburger-wrapper {
+			display: block;
+		}
+	}
+
+	.hamburger-btn {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 4px;
+		width: 32px;
+		height: 32px;
+		padding: 8px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		border-radius: 8px;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		color: var(--sl-color-text);
+	}
+
+	.hamburger-btn:hover {
+		background: rgba(148, 163, 184, 0.1);
+		transform: scale(1.05);
+	}
+
+	.hamburger-btn:active {
+		transform: scale(0.95);
+	}
+
+	.hamburger-line {
+		display: block;
+		width: 20px;
+		height: 2px;
+		background: currentColor;
+		border-radius: 1px;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		transform-origin: center;
+	}
+
+	.hamburger-btn.is-active {
+		color: var(--sl-color-accent);
+	}
+
+	.hamburger-btn.is-active .hamburger-line:nth-child(1) {
+		transform: translateY(6px) rotate(45deg);
+	}
+
+	.hamburger-btn.is-active .hamburger-line:nth-child(2) {
+		opacity: 0;
+		transform: scaleX(0);
+	}
+
+	.hamburger-btn.is-active .hamburger-line:nth-child(3) {
+		transform: translateY(-6px) rotate(-45deg);
+	}
+
+	.hamburger-dropdown {
+		position: absolute;
+		top: calc(100% + 4px);
+		right: 0;
+		min-width: 160px;
+		background: var(--sl-color-bg);
+		border: 1px solid var(--sl-color-border);
+		border-radius: var(--sl-radius-medium);
+		box-shadow: var(--shadow-lg);
+		padding: 8px;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-10px);
+		transition: opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		            transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+		            visibility 0.25s;
+		z-index: 300;
+	}
+
+	.hamburger-dropdown.is-open {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	.hamburger-content {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+	}
+</style>

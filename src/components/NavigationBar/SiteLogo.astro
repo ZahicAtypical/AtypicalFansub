@@ -1,21 +1,35 @@
 ---
+import AtypicalW from '../../assets/logos/Atypical_W.svg?raw';
+import AtypicalB from '../../assets/logos/Atypical_B.svg?raw';
+
+const logoDark = AtypicalW.replace(/<\?xml[^>]*\?>/g, '').trim();
+const logoLight = AtypicalB.replace(/<\?xml[^>]*\?>/g, '').trim();
 ---
 
-<a href="/" class="site-title">
-	<img
-		class="logo-dark"
-		alt="AtypicalFansub"
-		src="/Atypical_W.svg"
-		width="120"
-		height="22"
-	/>
-	<img
-		class="logo-light"
-		alt="AtypicalFansub"
-		src="/Atypical_B.svg"
-		width="120"
-		height="22"
-	/>
+<a href="/" class="site-title" aria-label="AtypicalFansub - Home">
+	<span class="logo-container logo-dark" aria-hidden="true">
+		<svg
+			viewBox="0 0 3437 798"
+			xmlns="http://www.w3.org/2000/svg"
+			xmlns:xlink="http://www.w3.org/1999/xlink"
+			role="img"
+			aria-label="AtypicalFansub"
+		>
+
+			<Fragment set:html={logoDark} />
+		</svg>
+	</span>
+	<span class="logo-container logo-light" aria-hidden="true">
+		<svg
+			viewBox="0 0 3437 798"
+			xmlns="http://www.w3.org/2000/svg"
+			xmlns:xlink="http://www.w3.org/1999/xlink"
+			role="img"
+			aria-label="AtypicalFansub"
+		>
+			<Fragment set:html={logoLight} />
+		</svg>
+	</span>
 </a>
 
 <style>
@@ -23,23 +37,45 @@
 		position: relative;
 		display: inline-flex;
 		align-items: center;
-		width: 120px;
+		width: auto;
+		min-width: 120px;
 		height: 22px;
 		color: var(--sl-color-text-accent);
 		text-decoration: none;
 		white-space: nowrap;
+		transition: opacity 0.2s ease, transform 0.2s ease;
 	}
 
-	.site-title img {
-		display: block;
+	.site-title:hover {
+		opacity: 1;
+		transform: scale(1.02);
+	}
+
+	.site-title:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 4px;
+		border-radius: 4px;
+	}
+
+	.logo-container {
 		position: absolute;
 		top: 0;
 		left: 0;
-		height: 22px;
+		display: block;
+		width: 100%;
+		height: 100%;
+		transition: opacity 0.3s ease;
+	}
+
+	.logo-container svg {
+		display: block;
 		width: auto;
-		max-width: 100%;
+		height: 100%;
+		max-width: none;
+		max-height: 22px;
 		object-fit: contain;
-		object-position: 0 50%;
+		object-position: left center;
+		preserveAspectRatio: xMinYMid slice;
 	}
 
 	.logo-dark {
@@ -56,5 +92,38 @@
 
 	:root[data-theme='light'] .logo-light {
 		opacity: 1;
+	}
+
+	@media (max-width: 768px) {
+		.site-title {
+			min-width: 110px;
+			height: 20px;
+		}
+
+		.logo-container svg {
+			max-height: 20px;
+		}
+	}
+
+	@media (max-width: 440px) {
+		.site-title {
+			min-width: 100px;
+			height: 20px;
+		}
+
+		.logo-container svg {
+			max-height: 20px;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.site-title {
+			min-width: 90px;
+			height: 20px;
+		}
+
+		.logo-container svg {
+			max-height: 20px;
+		}
 	}
 </style>

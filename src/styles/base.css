@@ -48,3 +48,17 @@ a:not(.hero-actions a):not(.starlight-hero .actions a) {
 a:not(.hero-actions a):not(.starlight-hero .actions a):hover {
 	color: var(--sl-color-accent-high);
 }
+
+/* ========================================
+   Starlight 布局覆盖
+   确保在使用 Starlight 的页面上，粘性页脚布局依然生效
+   ======================================== */
+.starlight body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.starlight main {
+	flex-grow: 1;
+}

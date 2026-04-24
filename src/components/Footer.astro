@@ -37,8 +37,24 @@ Footer 的高度由以下因素决定：
 	 * 透明背景，与页面背景无缝融合
 	 */
 	.site-footer {
-		background: transparent;
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 100;
 		padding: var(--space-1);
+		transform: translateY(100%);
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		pointer-events: none; /* Prevent interaction when hidden */
+		/* Match header style for consistency */
+		backdrop-filter: blur(4px) saturate(80%);
+		-webkit-backdrop-filter: blur(4px) saturate(80%);
+		background: rgba(15, 23, 42, 0.85);
+	}
+
+	.site-footer.is-visible {
+		transform: translateY(0);
+		pointer-events: auto; /* Allow interaction when visible */
 	}
 
 	/**
@@ -63,8 +79,8 @@ Footer 的高度由以下因素决定：
 		flex-shrink: 0;
 		display: flex;
 		transition: 
-			opacity 0.4s cubic-bezier(0.3, 0, 0.15, 1),
-			gap 0.4s cubic-bezier(0.3, 0, 0.15, 1);	
+			opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+			gap 0.4s cubic-bezier(0.4, 0, 0.2, 1);	
 		vertical-align: middle;
 		opacity: 1;
 		max-width: 300px;
@@ -194,3 +210,44 @@ Footer 的高度由以下因素决定：
 		}
 	}
 </style>
+
+<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const footer = document.querySelector('.site-footer') as HTMLElement | null;
+			if (!footer) return;
+
+			let lastScrollY = window.scrollY;
+			const scrollThreshold = 150;
+
+			const handleScroll = () => {
+				const currentScrollY = window.scrollY;
+				const isScrollingDown = currentScrollY > lastScrollY;
+				const isNearBottom = (window.innerHeight + currentScrollY) >= (document.documentElement.scrollHeight - scrollThreshold);
+
+				if (isScrollingDown && isNearBottom) {
+					footer.classList.add('is-visible');
+				}
+
+				lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
+			};
+
+			// Check if the page is scrollable on load.
+			const isScrollable = document.documentElement.scrollHeight > window.innerHeight;
+
+			if (!isScrollable) {
+				// If not scrollable, show the footer immediately.
+				footer.classList.add('is-visible');
+			} else {
+				// If scrollable, set up the scroll listener.
+				let scrollTimeout: number;
+
+				window.addEventListener('scroll', () => {
+					if (scrollTimeout) {
+						window.clearTimeout(scrollTimeout);
+					}
+					scrollTimeout = window.setTimeout(handleScroll, 50);
+				}, { passive: true });
+			}
+		});
+	</script>
+

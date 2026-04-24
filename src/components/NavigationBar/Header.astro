@@ -4,6 +4,7 @@ import MainNav from './MainNav.astro';
 import SocialIcons from './SocialIcons.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import LanguageToggle from './LanguageToggle.astro';
+import HamburgerMenu from './HamburgerMenu.astro';
 ---
 
 <header class="site-header">
@@ -15,22 +16,25 @@ import LanguageToggle from './LanguageToggle.astro';
 			<MainNav />
 		</div>
 		<div class="header-right">
-			<SocialIcons />
-			<ThemeToggle />
-			<LanguageToggle />
+			<div class="header-icons">
+				<SocialIcons />
+				<ThemeToggle />
+				<LanguageToggle />
+			</div>
+			<HamburgerMenu />
 		</div>
 	</div>
 </header>
 
 <style>
 	.site-header {
-		backdrop-filter: blur(12px) saturate(80%);
-		-webkit-backdrop-filter: blur(12px) saturate(80%);
-		background: rgba(15, 23, 42, 0.85);
 		position: sticky;
 		top: 0;
 		z-index: 100;
-		height: 42px;
+		backdrop-filter: blur(8px) saturate(80%);
+		-webkit-backdrop-filter: blur(8px) saturate(80%);
+		background: rgba(15, 23, 42, 0.85);
+		height: 50px;
 		border-bottom: none;
 	}
 
@@ -39,47 +43,141 @@ import LanguageToggle from './LanguageToggle.astro';
 	}
 
 	.header-inner {
+		position: relative;
 		max-width: 1400px;
 		margin: 0 auto;
 		padding: 0 var(--space-6);
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
 		height: 100%;
 	}
 
 	.header-left {
+		position: absolute;
+		left: var(--space-2);
+		top: 50%;
+		transform: translateY(-50%);
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
+		z-index: 10;
 	}
 
 	.header-center {
-		flex: 1;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
 		display: flex;
 		justify-content: center;
+		align-items: center;
+		z-index: 5;
+		transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.header-right {
+		position: absolute;
+		right: var(--space-2);
+		top: 50%;
+		transform: translateY(-50%);
 		display: flex;
 		align-items: center;
-		gap: 0.25rem;
+		gap: 0.125rem;
 		flex-shrink: 0;
+		z-index: 10;
+	}
+
+	.header-icons {
+		display: flex;
+		align-items: center;
+		gap: 0.0625rem;
+		transition: opacity 0.3s ease, transform 0.3s ease;
 	}
 
 	@media (max-width: 768px) {
-		.header-center {
-			display: none;
+		.header-inner {
+			padding: 0 var(--space-4);
 		}
 
-		.header-inner {
-			padding: 0 var(--space-3);
+		.header-left {
+			left: var(--space-4);
+		}
+
+		.header-right {
+			right: var(--space-4);
+		}
+
+		.header-center {
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		.header-icons {
+			gap: 0.125rem;
 		}
 	}
 
-	@media (max-width: 480px) {
-		.header-right .social-icons {
+	@media (max-width: 600px) {
+		.header-icons > :global(.social-icons) {
+			opacity: 0;
+			transform: scale(0.8);
+			pointer-events: none;
+			position: absolute;
+			width: 0;
+			overflow: hidden;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.header-center {
+			left: calc(100% - 140px);
+		}
+
+		.header-icons {
+			opacity: 0;
+			transform: scale(0.8);
+			pointer-events: none;
+			position: absolute;
+			width: 0;
+			overflow: hidden;
+		}
+	}
+
+	@media (max-width: 440px) {
+		.header-inner {
+			padding: 0 var(--space-3);
+		}
+
+		.header-left {
+			left: var(--space-3);
+		}
+
+		.header-right {
+			right: var(--space-3);
+		}
+
+		.header-center {
+			left: calc(100% - 120px);
+		}
+
+		.header-center :global(.main-nav a:not(:first-child)) {
 			display: none;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.header-inner {
+			padding: 0 var(--space-2);
+		}
+
+		.header-left {
+			left: var(--space-2);
+		}
+
+		.header-right {
+			right: var(--space-2);
+		}
+
+		.header-center {
+			left: calc(100% - 100px);
 		}
 	}
 </style>

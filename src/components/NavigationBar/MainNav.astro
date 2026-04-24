@@ -12,20 +12,94 @@
 		display: flex;
 		gap: var(--space-6);
 		align-items: center;
+		white-space: nowrap;
+		flex-wrap: nowrap;
+		overflow: hidden;
+		max-width: 100%;
 	}
 
 	.main-nav a {
 		color: var(--sl-color-text);
 		text-decoration: none;
 		font-weight: 500;
-		font-size: 1rem; /* rem 是相对于根元素(html)字体大小的单位，1rem 等于根元素的字体大小（通常是 16px）*/
+		font-size: 1rem;
 		letter-spacing: 0.01em;
-		transition: opacity 0.2s ease;
-		padding: 0.375rem 0;
+		transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
+		padding: 0.375rem 0.75rem;
+		position: relative;
+		min-height: 44px;
+		display: inline-flex;
+		align-items: center;
+		white-space: nowrap;
+		flex-shrink: 0;
+		min-width: max-content;
+		border-radius: var(--sl-radius-small);
+	}
+
+	.main-nav a::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0.75rem;
+		right: 0.75rem;
+		height: 2px;
+		background: var(--sl-color-accent);
+		transform: scaleX(0);
+		transition: transform 0.2s ease;
 	}
 
 	.main-nav a:hover {
-		opacity: 0.8;
+		opacity: 1;
 		color: var(--sl-color-accent);
+		transform: translateY(-1px);
+		background: rgba(148, 163, 184, 0.05);
+	}
+
+	.main-nav a:hover::after {
+		transform: scaleX(1);
+	}
+
+	.main-nav a:focus-visible {
+		outline: 2px solid var(--sl-color-accent);
+		outline-offset: 4px;
+		border-radius: 2px;
+	}
+
+	@media (max-width: 768px) {
+		.main-nav {
+			gap: var(--space-4);
+		}
+
+		.main-nav a {
+			font-size: 0.95rem;
+			padding: 0.375rem 0.5rem;
+		}
+
+		.main-nav a::after {
+			left: 0.5rem;
+			right: 0.5rem;
+		}
+	}
+
+	@media (max-width: 600px) {
+		.main-nav {
+			gap: var(--space-3);
+		}
+
+		.main-nav a {
+			font-size: 0.9rem;
+			padding: 0.375rem 0.375rem;
+		}
+
+		.main-nav a::after {
+			left: 0.375rem;
+			right: 0.375rem;
+		}
+	}
+
+	@media (max-width: 440px) {
+		.main-nav a:not(:first-child) {
+			display: none;
+		}
 	}
 </style>
