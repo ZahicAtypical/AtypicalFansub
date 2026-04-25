@@ -5,10 +5,6 @@
 	<div class="hero-content">
 		<h1>非典型字幕组</h1>
 		<p class="tagline">专业字幕翻译团队，连接世界与您的视听体验</p>
-		<div class="hero-actions">
-			<a href="/works/" class="btn-primary">浏览作品库</a>
-			<a href="/about/" class="btn-secondary">了解更多</a>
-		</div>
 	</div>
 </section>
 
@@ -21,7 +17,7 @@
 		justify-content: center;
 		text-align: center;
 		flex: 1;
-		min-height: 0;
+		height:20vh;
 		padding: var(--space-24) var(--space-8) var(--space-16);
 		overflow: hidden;
 		background:
@@ -33,7 +29,6 @@
 	.hero-content {
 		margin: 0 auto;
 		width: 100%;
-		max-width: 1200px;
 	}
 
 	.hero h1 {
@@ -53,55 +48,4 @@
 		line-height: 1.6;
 	}
 
-	.hero-actions {
-		display: flex;
-		gap: var(--space-4);
-		justify-content: center;
-		flex-wrap: wrap;
-	}
-
-	.btn-primary,
-	.btn-secondary {
-		padding: 0.875rem 2rem;
-		border-radius: var(--sl-radius-full);
-		font-weight: 600;
-		font-size: 0.9375rem;
-		transition: all 0.3s var(--ease-out);
-		text-decoration: none;
-		display: inline-flex;
-		align-items: center;
-		gap: var(--space-2);
-	}
-
-	.btn-primary {
-		background: linear-gradient(135deg, var(--sl-color-accent) 0%, var(--sl-color-accent-high) 100%);
-		color: white;
-		box-shadow: var(--shadow-glow);
-		border: none;
-	}
-
-	.btn-primary:hover {
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-glow-lg);
-	}
-
-	.btn-secondary {
-		background: rgba(148, 163, 184, 0.08);
-		color: var(--sl-color-text);
-		border: 1px solid var(--sl-color-border);
-		backdrop-filter: blur(8px);
-	}
-
-	.btn-secondary:hover {
-		transform: translateY(-2px);
-		border-color: var(--sl-color-accent);
-		background: rgba(37, 99, 235, 0.08);
-	}
-
-	@media (max-width: 440px) {
-		.hero {
-			min-height: 70vh;
-			padding: var(--space-16) var(--space-6) var(--space-12);
-		}
-	}
 </style>
